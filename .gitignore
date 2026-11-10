@@ -1,0 +1,18 @@
+﻿# 构建产物
+*.o
+/calib
+main_thr*.o
+snippet.o
+
+# 运行时中间数据（根目录与 /tmp 的 h*.csv、b*.csv 等；data/ 下的聚合结果要保留）
+/h*.csv
+/b*.csv
+/m*.csv
+/r*.csv
+/cal*.csv
+/cross_*.csv
+/tmp/
+
+# Python
+__pycache__/
+*.pyc
