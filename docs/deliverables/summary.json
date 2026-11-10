@@ -1,0 +1,76 @@
+{
+  "exp_id": "L1-1",
+  "status": "success",
+  "metrics": {
+    "hits_per_round_main": {
+      "mean": 17.987,
+      "std": 9.0651,
+      "n": 200000,
+      "note": "HISTORY_SIZE=256, IN_PLACE=1, THR=4；每轮 100 次迭代的命中数，满分 100"
+    },
+    "hits_per_round_ctrl": {
+      "mean": 0.0635,
+      "std": 0.2595,
+      "n": 200000,
+      "note": "同上条件，但训练到安全目标 ftable[0]（零假设对照）"
+    },
+    "hit_rate_per_iteration_main": {
+      "mean": 0.1799,
+      "std": 0.0907,
+      "n": 200000,
+      "note": "= hits_per_round_main / 100"
+    },
+    "hit_rate_per_iteration_ctrl": {
+      "mean": 0.000635,
+      "std": 0.002595,
+      "n": 200000,
+      "note": "= hits_per_round_ctrl / 100"
+    },
+    "signal_to_noise_ratio": {
+      "mean": 283.3,
+      "std": null,
+      "n": 1,
+      "note": "MAIN 均值 / CTRL 均值"
+    },
+    "rounds_with_hits_ge_10_main": {
+      "mean": 160021,
+      "std": null,
+      "n": 200000,
+      "note": "80.0% 的轮次 hits>=10；CTRL 为 0/200000"
+    },
+    "rounds_with_hits_ge_51_main": {
+      "mean": 38,
+      "std": null,
+      "n": 200000,
+      "note": "0.019%；CTRL 为 0/200000"
+    },
+    "history_size_sweep_main_mean_hits": {
+      "32": 0.1919,
+      "48": 0.3795,
+      "64": 0.5828,
+      "96": 1.4455,
+      "128": 3.7570,
+      "160": 6.1459,
+      "192": 7.3648,
+      "256": 20.7229,
+      "384": 0.7700,
+      "512": 0.0040,
+      "note": "每档 100 链 × 300 轮 × 100 迭代 = 600 万次测量；CTRL 在所有档位 hits>=10 均为 0"
+    },
+    "out_of_place_total_measurements": {
+      "mean": 0,
+      "std": null,
+      "n": 46000000,
+      "note": "异地配置合计 4600 万次测量（H=64 的 4000 万 + H=256 的 600 万），命中数为 0"
+    }
+  },
+  "judgement": "在倚天710(Neoverse-N2)上成功复现 BHB 碰撞：将 HISTORY_SIZE 由上游默认 64 调整为 256 后，训练到攻击目标（MAIN）的命中率为 17.99%±9.07（n=200000 轮），训练到安全目标（CTRL）仅 0.064%±0.26，两者相差 283 倍；CTRL 在 20 万轮中 hits>=10 为 0。同条件下异地配置 4600 万次测量 0 命中（P<1e-9）。HISTORY_SIZE 扫描呈单峰：32→0.19、128→3.76、256→20.72、384→0.77、512→0.004，峰值在 256，与 N2 的 BHB 有效长度量级一致。",
+  "failure_mode": null,
+  "evidence": [
+    "final_256.csv：20 万轮的配对数据（MAIN/CTRL 各 20 万轮）",
+    "h32.csv ~ h512.csv：HISTORY_SIZE 扫描十档",
+    "h256_out.csv：H=256 异地对照，600 万次全 0",
+    "calib_big.csv.gz：H=64 异地对照，4000 万次全 0",
+    "calib.c：配对测量仪源码（本地 path: bhb_lab/calib.c）"
+  ]
+}

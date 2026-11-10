@@ -1,0 +1,7 @@
+﻿experiment,H,config,rounds,iters,mode,n,mean_hits,sd,max,ge10,ge10_pct,ge51
+main_result,256,in-place,1000,100,MAIN,200000,17.9870,9.0651,59,160021,80.0,38
+main_result,256,in-place,1000,100,CTRL,200000,0.0635,0.2595,3,0,0.0,0
+sweep_point,256,in-place,300,100,MAIN,30000,16.5986,,53,22307,74.4,
+sweep_point,288,in-place,300,100,MAIN,30000,17.3348,,48,25980,86.6,
+repeat_mean,256,in-place,300,100,MAIN,150000,18.5300,1.7000,,,,n=5 runs
+repeat_mean,288,in-place,300,100,MAIN,180000,17.0900,0.5100,,,,n=6 runs
