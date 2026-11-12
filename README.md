@@ -1,11 +1,11 @@
 # Spectre-BHB 复现（Yitian 710 / Neoverse-N2）
 
-> **版本说明（2026-11-13）**：本仓库已更新为**单一仪器版**——
-> 全部数据由 `src/bhb_final.c`（合并版：配对循环 + `POS`/`SELF` 闸门 + `--train-n` / `--seed`）
-> **单次连续运行（1023 秒）**采集，不再混用早期 `calib.c` 的数据。早期版本保留在 git 历史中。
+> 版本说明（2026-11-13）：本仓库已更新为单一仪器版——全部数据由 `src/bhb_final.c`
+> （合并版：配对循环 + POS/SELF 闸门 + `--train-n` / `--seed`）单次连续运行（1023 秒）采集，
+> 不再混用早期 `calib.c` 的数据。早期版本保留在 git 历史中。
 >
-> 主结果：`HISTORY_SIZE=256`、`--train-n=1`、`THR=4` 下 **MAIN 16.61% vs CTRL 0.065%（256 倍）**，
-> 20 万轮中 CTRL 强碰撞（`hits≥10`）为 **0**；异地对照 **800 万次零命中**。
+> 主结果：`HISTORY_SIZE=256`、`--train-n=1`、`THR=4` 下，MAIN 16.61% vs CTRL 0.065%（256 倍），
+> 20 万轮中 CTRL 强碰撞（`hits≥10`）为 0；异地对照 800 万次零命中。
 > 参数终定：`HISTORY_SIZE=256`、`--train-n=32`（对齐他人用 128）、`THR=4`。
 
 > 维护者：ZYW（GitHub [@yzcc6](https://github.com/yzcc6)） · 索引仓：[`illustager/yt710-sca-hub`](https://github.com/illustager/yt710-sca-hub)（本仓库作为 `Spectre/` 下的 submodule 登记）
